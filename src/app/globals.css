@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --cor-1: #424874;
+    --cor-2: #A6B1E1;
+    --cor-3: #DCD6F7;
+    --cor-4: #F4EEFF;
+}
