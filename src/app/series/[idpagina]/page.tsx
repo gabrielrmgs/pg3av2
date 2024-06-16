@@ -1,5 +1,3 @@
-import App from "../../../../Components/pagination";
-
 //Funçao para requisitar a API informação sobre os filmes
 async function getData(paginaFilme) {
 
@@ -13,7 +11,7 @@ async function getData(paginaFilme) {
   }
 
 
-  const res = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=${paginaFilme}&primary_release_year=2024&sort_by=popularity.desc`, cabecalho)
+  const res = await fetch(`https://api.themoviedb.org/3/discover/tv?first_air_date_year=2024&include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=${paginaFilme}&sort_by=popularity.desc`, cabecalho)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -34,7 +32,7 @@ async function getGenres() {
   }
 
 
-  const res = await fetch('https://api.themoviedb.org/3/genre/movie/list?language=pt', cabecalho)
+  const res = await fetch('https://api.themoviedb.org/3/genre/tv/list?language=pt', cabecalho)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -48,6 +46,7 @@ export default async function Page({ params }) {
 
   //chamando funcos de requisiçao e guardando resposta em variaveis
   const data = await getData(params.idpagina);
+  console.log(data)
   const genres = await getGenres();
   var test = genres.genres;
   const generos = [];
@@ -101,26 +100,26 @@ export default async function Page({ params }) {
       <main className="grid grid-cols-6 min-h-screen bg-cor-1 items-center justify-center p-36 gap-9">
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[0].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[0].title}</li>
+            <li>Título: {data.results[0].name}</li>
             <li>Gênero: {getGenero(data.results[0].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[0].release_date}</li>
+            <li>Lançamento: {data.results[0].first_air_date}</li>
           </ul>
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[1].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[1].title}</li>
+            <li>Título: {data.results[1].name}</li>
             <li>Gênero: {getGenero(data.results[1].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[1].release_date}</li>
+            <li>Lançamento: {data.results[1].first_air_date}</li>
 
           </ul>
 
@@ -128,14 +127,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all flex-col flex-wrap scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[2].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[2].title}</li>
+            <li>Título: {data.results[2].name}</li>
             <li>Gênero: {getGenero(data.results[2].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[2].release_date}</li>
+            <li>Lançamento: {data.results[2].first_air_date}</li>
 
           </ul>
 
@@ -143,14 +142,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[3].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[3].title}</li>
+            <li>Título: {data.results[3].name}</li>
             <li>Gênero: {getGenero(data.results[3].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[3].release_date}</li>
+            <li>Lançamento: {data.results[3].first_air_date}</li>
 
           </ul>
 
@@ -158,14 +157,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all flex-col flex-wrap scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[4].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[4].title}</li>
+            <li>Título: {data.results[4].name}</li>
             <li>Gênero: {getGenero(data.results[4].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[4].release_date}</li>
+            <li>Lançamento: {data.results[4].first_air_date}</li>
 
           </ul>
 
@@ -173,14 +172,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all flex-col flex-wrap scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[5].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[5].title}</li>
+            <li>Título: {data.results[5].name}</li>
             <li>Gênero: {getGenero(data.results[5].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[5].release_date}</li>
+            <li>Lançamento: {data.results[5].first_air_date}</li>
 
           </ul>
 
@@ -188,26 +187,26 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[6].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[6].title}</li>
+            <li>Título: {data.results[6].name}</li>
             <li>Gênero: {getGenero(data.results[6].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[6].release_date}</li>
+            <li>Lançamento: {data.results[6].first_air_date}</li>
           </ul>
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[7].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[7].title}</li>
+            <li>Título: {data.results[7].name}</li>
             <li>Gênero: {getGenero(data.results[7].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[7].release_date}</li>
+            <li>Lançamento: {data.results[7].first_air_date}</li>
 
           </ul>
 
@@ -215,14 +214,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all flex-col flex-wrap scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[8].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[8].title}</li>
+            <li>Título: {data.results[8].name}</li>
             <li>Gênero: {getGenero(data.results[8].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[8].release_date}</li>
+            <li>Lançamento: {data.results[8].first_air_date}</li>
 
           </ul>
 
@@ -230,14 +229,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[9].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[9].title}</li>
+            <li>Título: {data.results[9].name}</li>
             <li>Gênero: {getGenero(data.results[9].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[9].release_date}</li>
+            <li>Lançamento: {data.results[9].first_air_date}</li>
 
           </ul>
 
@@ -245,14 +244,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all flex-col flex-wrap scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[10].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[10].title}</li>
+            <li>Título: {data.results[10].name}</li>
             <li>Gênero: {getGenero(data.results[10].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[10].release_date}</li>
+            <li>Lançamento: {data.results[10].first_air_date}</li>
 
           </ul>
 
@@ -260,14 +259,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all flex-col flex-wrap scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[11].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[11].title}</li>
+            <li>Título: {data.results[11].name}</li>
             <li>Gênero: {getGenero(data.results[11].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[11].release_date}</li>
+            <li>Lançamento: {data.results[11].first_air_date}</li>
 
           </ul>
 
@@ -275,26 +274,26 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[12].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[12].title}</li>
+            <li>Título: {data.results[12].name}</li>
             <li>Gênero: {getGenero(data.results[12].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[12].release_date}</li>
+            <li>Lançamento: {data.results[12].first_air_date}</li>
           </ul>
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[13].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[13].title}</li>
+            <li>Título: {data.results[13].name}</li>
             <li>Gênero: {getGenero(data.results[13].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[13].release_date}</li>
+            <li>Lançamento: {data.results[13].first_air_date}</li>
 
           </ul>
 
@@ -302,14 +301,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all flex-col flex-wrap scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[14].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[14].title}</li>
+            <li>Título: {data.results[14].name}</li>
             <li>Gênero: {getGenero(data.results[14].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[14].release_date}</li>
+            <li>Lançamento: {data.results[14].first_air_date}</li>
 
           </ul>
 
@@ -317,14 +316,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[15].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[15].title}</li>
+            <li>Título: {data.results[15].name}</li>
             <li>Gênero: {getGenero(data.results[15].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[15].release_date}</li>
+            <li>Lançamento: {data.results[15].first_air_date}</li>
 
           </ul>
 
@@ -332,14 +331,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all flex-col flex-wrap scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[16].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[16].title}</li>
+            <li>Título: {data.results[16].name}</li>
             <li>Gênero: {getGenero(data.results[16].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[16].release_date}</li>
+            <li>Lançamento: {data.results[16].first_air_date}</li>
 
           </ul>
 
@@ -347,14 +346,14 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all flex-col flex-wrap scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[17].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[17].title}</li>
+            <li>Título: {data.results[17].name}</li>
             <li>Gênero: {getGenero(data.results[17].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[17].release_date}</li>
+            <li>Lançamento: {data.results[17].first_air_date}</li>
 
           </ul>
 
@@ -362,26 +361,26 @@ export default async function Page({ params }) {
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[18].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[18].title}</li>
+            <li>Título: {data.results[18].name}</li>
             <li>Gênero: {getGenero(data.results[18].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[18].release_date}</li>
+            <li>Lançamento: {data.results[18].first_air_date}</li>
           </ul>
         </div>
         <div className="flex h-96 w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all scale-100">
           <div className="bg-cor-2 flex w-full h-9 justify-center items-center rounded-t-lg border-b border-b-cor-1">
-            <h1>Filmes</h1>
+            <h1>Série</h1>
           </div>
 
           <ul className="flex flex-col absolute mt-12 ml-6">
             <img src={`${imagesIMDB}${data.results[19].poster_path}`} className="w-44 h-52 rounded-lg shadow-md mb-3"></img>
-            <li>Título: {data.results[19].title}</li>
+            <li>Título: {data.results[19].name}</li>
             <li>Gênero: {getGenero(data.results[19].genre_ids[0])}</li>
-            <li>Lançamento: {data.results[19].release_date}</li>
+            <li>Lançamento: {data.results[19].first_air_date}</li>
 
           </ul>
 
@@ -393,13 +392,13 @@ export default async function Page({ params }) {
       <footer>
         <div className="flex items-center justify-center gap-9 m-3">
           <hr className="w-24 border border-black"></hr>
-          <button><a href={params.idpagina == 1? '/filme/1' : `/filme/${parseInt(params.idpagina)-1}`}>Anterior</a></button>
+          <button><a href={params.idpagina == 1? '/series/1' : `/series/${parseInt(params.idpagina)-1}`}>Anterior</a></button>
           <hr className="w-3 border border-black"></hr>
-          <button><a href={`/filme/1`}>1</a></button>
-          <button><a href={`/filme/2`}>2</a></button>
-          <button><a href={`/filme/3}`}>3</a></button>
+          <button><a href={`/series/1`}>1</a></button>
+          <button><a href={`/series/2`}>2</a></button>
+          <button><a href={`/series/3}`}>3</a></button>
           <hr className="w-3 border border-black"></hr>
-          <button><a href={`/filme/${parseInt(params.idpagina)+1}`}>Próxima</a></button>
+          <button><a href={`/series/${parseInt(params.idpagina)+1}`}>Próxima</a></button>
           <hr className="w-24 border border-black"></hr>
         </div>
       </footer>
