@@ -1,6 +1,8 @@
 import getFilmesDetalhe from "@/app/server3";
 import getVideoTrailer from "@/app/server4";
 import { BsYoutube } from "react-icons/bs";
+import { format, parseISO} from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 export default async function Home({ params }) {
     const data = await getFilmesDetalhe(params.detailid);
     const videosData = await getVideoTrailer(params.detailid)
@@ -37,8 +39,10 @@ export default async function Home({ params }) {
                         <h3> Popularidade: {data.popularity}</h3>
                         <h2> Nota: {data.vote_average}</h2>
                         <p> Gêneros: {data.genres.map((e) => (data.genres.indexOf(e) < data.genres.length - 1)? e.name+', ' : e.name+'.') }</p>
-                        <h2> Data de Lançamento: {data.release_date}</h2>
-                        <h2> Data de Lançamento: {data.production_companies.map((e) => (data.production_companies.indexOf(e) < data.production_companies.length - 1)? e.name+', ' : e.name+'.')}</h2>
+                        <h2> Data de Lançamento: {format(parseISO(data.release_date), "dd 'de' MMM 'de' yyyy", {
+                            locale: ptBR,
+                        })}</h2>
+                        <h2> Produtores: {data.production_companies.map((e) => (data.production_companies.indexOf(e) < data.production_companies.length - 1)? e.name+', ' : e.name+'.')}</h2>
                     </div>
                 </div>
             </main>

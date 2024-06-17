@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import getSeries2024 from "@/app/server5";
 import getGenerosSeries from "@/app/server6";
+import { format, parseISO } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
 
 export default async function Page({ params }) {
   const data = await getSeries2024(params.idpagina);
@@ -54,7 +56,9 @@ export default async function Page({ params }) {
                         return e.name
                       }
                     })}</li>
-                    <li>Lançamento: {serie.first_air_date}</li>
+                    <li>Lançamento: {format(parseISO(serie.first_air_date), "dd 'de' MMM 'de' yyyy", {
+                            locale: ptBR,
+                        })}</li>
                   </ul>
                 </div>
               </div>

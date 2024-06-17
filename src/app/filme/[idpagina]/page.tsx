@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import getFilmes2024 from "@/app/server";
 import getGeneros from "@/app/server2";
+import { format, parseISO } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
 
 export default async function Page({ params }) {
   //chamando funcoes de requisiçao e guardando resposta em variaveis
@@ -55,7 +57,9 @@ export default async function Page({ params }) {
                         return e.name
                       }
                     })}</li>
-                    <li>Lançamento: {flm.release_date}</li>
+                    <li>Lançamento: {format(parseISO(flm.release_date), "dd 'de' MMM 'de' yyyy", {
+                            locale: ptBR,
+                        })}</li>
                   </ul>
                 </div>
               </div>
