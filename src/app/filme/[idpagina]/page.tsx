@@ -40,7 +40,7 @@ export default async function Page({ params }) {
 
       <main className="min-h-screen bg-cor-1 items-center justify-center">
 
-        <div className=" w-full grid grid-cols-6 p-32 gap-6">
+        <div className=" w-full grid grid-cols-6 p-32 gap-6 max-[1734px]:grid-cols-5 max-[1520px]:grid-cols-4 max-[1240px]:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1">
           {data.results.map((flm) => (
             <a key={flm.id} href={`/filme/${params.idpagina}/${flm.id}`}>
               <div className="flex flex-col  h-[420px] w-60 bg-cor-3 rounded-lg hover:scale-105 transition-all duration-300">
