@@ -12,10 +12,10 @@ export default async function Home({ params }) {
         <body className="bg-cor-1">
 
             <main className="flex flex-col bg-cor-1">
-                <div className="flex flex-col justify-center items-center h-24 w-full bg-cor-4">
-                    <h1 className="text-3xl">{data.title}</h1>
-                    <h3>{data.tagline}</h3>
-                    <div className="absolute mr-[2000px]  h-9 w-16 flex items-center justify-center rounded-lg shadow-lg border border-cor-2 bg-cor-3 hover:scale-95">
+                <div className="flex flex-col justify-center items-center h-24 w-full bg-cor-4 shadow-md shadow-gray-800 border border-b-2 border-b-cor-2">
+                    <h1 className="text-3xl text-cor-1">{data.title}</h1>
+                    <h3 className="text-cor-1">{data.tagline}</h3>
+                    <div className="absolute mr-[1720px]  h-9 w-16 flex items-center justify-center rounded-lg shadow-lg border border-cor-2 bg-cor-3 hover:scale-95 max-[1794px]:mr-[972px] max-[1068px]:mr-[621px]">
                         <a href={`/filme/${params.idpagina}`} >
                             <button>Voltar</button>
                         </a>
