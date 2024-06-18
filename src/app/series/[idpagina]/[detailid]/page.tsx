@@ -1,10 +1,12 @@
 import getSeriesDetalhe from "@/app/server8";
+import getSeriesDetalheIngles from "@/app/seriesIngles";
 import getVideoTrailerSerie from "@/app/server7";
 import { BsYoutube } from "react-icons/bs";
 import { format, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
 export default async function Home({ params }) {
     const data = await getSeriesDetalhe(params.detailid);
+    const dataEn = await getSeriesDetalheIngles(params.detailid);
     const videosData = await getVideoTrailerSerie(params.detailid)
     const imagesIMDB = "https://image.tmdb.org/t/p/w500";
 
@@ -35,7 +37,7 @@ export default async function Home({ params }) {
                 </div>
                 <div className="flex justify-center h-96 w-full mt-[24px] mb-96">
                     <div className="flex flex-col items-center h-[720px] w-[1540px] bg-cor-2  p-9 rounded-lg gap-3">
-                        <p className="text-base w-[1200px] mb-9 justify-center items-center flex">{data.overview == "" ? '' : `Sinopse: \n${data.overview}`}</p>
+                        <p className="text-base w-[1200px] mb-9 justify-center items-center flex">{data.overview == "" ? dataEn.overview : `Sinopse: \n${data.overview}`}</p>
                         <h3> Criado por: {data.created_by[0] !== undefined ? data.created_by[0].name : 'Não informado'}</h3>
                         <h3> Popularidade: {data.popularity}</h3>
                         <h2> Nota: {data.vote_average}</h2>
