@@ -49,7 +49,7 @@ export default async function Page({ params }) {
 
               <div className="flex flex-col items-center justify-center">
                 <ul className="flex flex-col justify-center items-center text-center p-3">
-                  <img src={`${imagesIMDB}${flm.poster_path}`} className="rounded-lg shadow-md mb-5 h-52 w-48"></img>
+                  <img src={flm.poster_path !== null ? `${imagesIMDB}${flm.poster_path}` : `${imagesIMDB}${flm.backdrop_path}`} className="rounded-lg shadow-md mb-5 h-52 w-48"></img>
                   <li>Título: {flm.title}</li>
                   <li>Gênero: {genres.genres.map((e) => {
                     if (e.id == flm.genre_ids[0]) {

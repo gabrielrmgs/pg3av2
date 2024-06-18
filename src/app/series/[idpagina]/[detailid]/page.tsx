@@ -34,15 +34,24 @@ export default async function Home({ params }) {
                     </div>
                 </div>
                 <div className="flex justify-center h-96 w-full mt-[24px] mb-96">
-                    <div className="flex flex-col items-center h-[720px] w-[1540px] bg-cor-2  p-9 rounded-lg">
-                        <p className="text-base columns-1">{data.overview}</p>
+                    <div className="flex flex-col items-center h-[720px] w-[1540px] bg-cor-2  p-9 rounded-lg gap-3">
+                        <p className="text-base w-[1200px] mb-9 justify-center items-center flex">{data.overview == "" ? '' : `Sinopse: \n${data.overview}`}</p>
+                        <h3> Criado por: {data.created_by[0] !== undefined ? data.created_by[0].name : 'Não informado'}</h3>
                         <h3> Popularidade: {data.popularity}</h3>
                         <h2> Nota: {data.vote_average}</h2>
                         <p> Gêneros: {data.genres.map((e) => (data.genres.indexOf(e) < data.genres.length - 1)? e.name+', ' : e.name+'.') }</p>
                         <h2> Data de Lançamento: {format(parseISO(data.first_air_date), "dd 'de' MMM 'de' yyyy", {
                             locale: ptBR,
                         })}</h2>
-                        <h2> Produzido por: {data.production_companies.map((e) => (data.production_companies.indexOf(e) < data.production_companies.length - 1)? e.name+', ' : e.name+'.')}</h2>
+                        <h2>Temporadas: {data.number_of_seasons}.</h2>
+                        <h2>Total de episódios: {data.number_of_episodes}.</h2>
+                        <h2> Data do último episódio: {format(parseISO(data.last_episode_to_air.air_date), "dd 'de' MMM 'de' yyyy", {
+                            locale: ptBR,
+                        })}</h2>
+                        <h2> Ultimo episódio lançado: {data.last_episode_to_air.name}</h2>
+                        <h2> Produzido por: {data.production_companies[0] != null ? data.production_companies.map((e) => (data.production_companies.indexOf(e) < data.production_companies.length - 1)? e.name+', ' : e.name+'.') : 'Não informado'}</h2>
+                        <h2> Site oficial:<a href={data.homepage !== '' ? data.homepage : ''} target={data.homepage !== '' ? '_blank' : ''} className="text-cor-1 hover:text-cor-4"> {data.homepage !== '' ? data.homepage : 'Não informado'}</a></h2>
+                        <h2> País de origem: {data.production_countries[0] != null ? data.production_countries[0].name : 'Não informado' }</h2>
                     </div>
                 </div>
             </main>
